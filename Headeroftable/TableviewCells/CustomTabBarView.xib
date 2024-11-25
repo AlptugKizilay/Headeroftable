@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTabBarView" customModule="Headeroftable" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomTabBarView" customModule="Headeroftable" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="-60" translatesAutoresizingMaskIntoConstraints="NO" id="Kz2-iz-8oe">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-0F-6Dy">
+                            <rect key="frame" x="0.0" y="0.0" width="165" height="80"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="house" catalog="system" imagePlacement="top" title="Home">
+                                <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
+                            </buttonConfiguration>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAr-Lu-xKy">
+                            <rect key="frame" x="105" y="0.0" width="165" height="80"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="suit.heart" catalog="system" imagePlacement="top" title="Favorite">
+                                <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
+                            </buttonConfiguration>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpr-oD-MHb">
+                            <rect key="frame" x="210" y="0.0" width="165" height="80"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="person.crop.circle" catalog="system" imagePlacement="top" title="Profile">
+                                <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
+                            </buttonConfiguration>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="NYp-nh-Gvf"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="NYp-nh-Gvf" firstAttribute="trailing" secondItem="Kz2-iz-8oe" secondAttribute="trailing" id="ZkR-O4-hyP"/>
+                <constraint firstItem="Kz2-iz-8oe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="f6O-ci-7It"/>
+                <constraint firstItem="Kz2-iz-8oe" firstAttribute="leading" secondItem="NYp-nh-Gvf" secondAttribute="leading" id="ngS-2b-w9i"/>
+                <constraint firstAttribute="bottom" secondItem="Kz2-iz-8oe" secondAttribute="bottom" id="vMz-yE-llo"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="favoriteButton" destination="MAr-Lu-xKy" id="kd6-dn-Ojj"/>
+                <outlet property="homeButton" destination="n9R-0F-6Dy" id="Nk1-eg-HRl"/>
+                <outlet property="profileButton" destination="hpr-oD-MHb" id="iYZ-jX-eAU"/>
+                <outlet property="stackView" destination="Kz2-iz-8oe" id="48C-VY-1rB"/>
+            </connections>
+            <point key="canvasLocation" x="-25" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="123"/>
+        <image name="suit.heart" catalog="system" width="128" height="107"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
