@@ -38,14 +38,7 @@ class MainPageVC: UIViewController {
                 print("Error: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
-//        viewModel.articles
-//                    .asDriver() // BehaviorRelay'yi UI'de kullanmak için Driver'a dönüştür
-//                    .drive(tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, article, cell in
-//                        cell.textLabel?.text = article.title
-//                        cell.detailTextLabel?.text = article.byline
-//                    }
-//                    .disposed(by: disposeBag)
-//        
+
         // Hata durumunda bir uyarı göster
         viewModel.error
             .observe(on: MainScheduler.instance)

@@ -9,7 +9,9 @@ import UIKit
 
 class CellCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var labelAbstract: UILabel!
     
     static let identifier = "CellCollectionViewCell"
     
