@@ -6,19 +6,56 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class ViewController: UIViewController {
+class MainPageVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    private let viewModel = MainPageViewModel()
+    private let disposeBag = DisposeBag()
     let customTabBarView = CustomTabBarView.createView()
     private var previousScrollOffset: CGFloat = 0
+    var articles: [Article] = []
 
     override func viewDidLoad() {
-            super.viewDidLoad()
+        super.viewDidLoad()
+        setupTableView()
+        setupCustomTabBar()
+        viewModel.fetchArticles()
+        setupBindings()
+        tableView.reloadData()
         
-            setupTableView()
-            setupCustomTabBar()
         }
+    private func setupBindings() {
+        viewModel.articles
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { articles in
+                print("Fetched Articles count: \(articles.count)")
+                self.articles = articles
+                self.tableView.reloadData()
+            }, onError: { error in
+                print("Error: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+//        viewModel.articles
+//                    .asDriver() // BehaviorRelay'yi UI'de kullanmak için Driver'a dönüştür
+//                    .drive(tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, article, cell in
+//                        cell.textLabel?.text = article.title
+//                        cell.detailTextLabel?.text = article.byline
+//                    }
+//                    .disposed(by: disposeBag)
+//        
+        // Hata durumunda bir uyarı göster
+        viewModel.error
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] errorMessage in
+                let alert = UIAlertController(title: "Hata", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+                self?.present(alert, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
 
     private func setupTableView() {
             tableView.dataSource = self
@@ -40,9 +77,10 @@ class ViewController: UIViewController {
         }
 
 }
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        print(articles.count)
+        return articles.count + 2
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
@@ -54,7 +92,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "secondCell", for: indexPath) as! SecondCellTableViewCell
                     return cell
                 }else {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                   
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CellTableViewCell
+                    let article = articles[indexPath.row - 2]
+                    cell.label.text = article.title
         return cell
                 }
     }
@@ -68,7 +109,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
 }
-extension ViewController: UIScrollViewDelegate {
+extension MainPageVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView == tableView else { return }
 

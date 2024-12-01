@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct UIConstants {
-    static let collectionViewItemSize = CGSize(width: 250, height: 250)
+    static let collectionViewItemSize = CGSize(width: 320, height: 240)
     static let collectionViewInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
     static let tableViewCellIdentifier = "cell"
     static let collectionViewCellIdentifier = "CellCollectionViewCell"

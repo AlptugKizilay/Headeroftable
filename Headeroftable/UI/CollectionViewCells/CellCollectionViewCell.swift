@@ -37,7 +37,7 @@ class CellCollectionViewCell: UICollectionViewCell {
         }
     public func configure(with image: UIImage) {
         imageView.image = image
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
     }
