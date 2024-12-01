@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import RxSwift
 
 class FirstCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
-
+    var collectionViewArticles: [Article] = []
+    var viewModel: MainPageViewModel? // ViewModel dışarıdan atanacak
+    private var disposeBag = DisposeBag()
+       
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
+        bindViewModel()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,12 +45,35 @@ class FirstCellTableViewCell: UITableViewCell {
             forCellWithReuseIdentifier: UIConstants.collectionViewCellIdentifier
         )
     }
-    
+    // ViewModel'deki articles verisini bağlama
+       func bindViewModel() {
+          guard let viewModel = viewModel else {
+                      print("ViewModel not set!")
+                      return
+                  }
+          // Abonelikleri temizleyip yeniden oluştur
+          disposeBag = DisposeBag()
+
+          viewModel.articles
+              .observe(on: MainScheduler.instance) // UI işlemleri için ana thread'e geç
+              .subscribe(onNext: { [weak self] articles in
+                  print("FirstCellTableViewCell - Articles count: \(articles.count)")
+                  // Gelen verilerle hücreyi güncelle
+                  self?.updateUI(with: articles)
+              })
+              .disposed(by: disposeBag)
+      }
+
+      // UI'yi güncellemek için bir fonksiyon
+      private func updateUI(with articles: [Article]) {
+          collectionViewArticles = articles
+          collectionView.reloadData()
+      }
 
 }
 extension FirstCellTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return collectionViewArticles.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            
@@ -52,7 +81,7 @@ extension FirstCellTableViewCell: UICollectionViewDataSource, UICollectionViewDe
                     withReuseIdentifier: UIConstants.collectionViewCellIdentifier,
                    for: indexPath
                ) as! CellCollectionViewCell
-               cell.configure(with: UIImage(named: "yemek_resim")!)
+        cell.configure(with: collectionViewArticles[indexPath.row])
                return cell
        }
     //Snap Animasyonu

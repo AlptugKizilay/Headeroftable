@@ -79,6 +79,8 @@ extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
                     // İlk CollectionView için
                     let cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath) as! FirstCellTableViewCell
+                    cell.viewModel = viewModel // ViewModel'i hücreye ata
+                    cell.bindViewModel() // ViewModel'i bağla
                     return cell
                 } else if indexPath.row == 1 {
                     // İkinci CollectionView için

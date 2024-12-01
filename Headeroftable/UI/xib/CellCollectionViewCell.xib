@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPd-Uy-tDO">
-                        <rect key="frame" x="5" y="70" width="310" height="19.333333333333329"/>
+                        <rect key="frame" x="5" y="158.66666666666666" width="310" height="19.333333333333343"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -35,12 +35,12 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="FPd-Uy-tDO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="70" id="JrB-nw-NdR"/>
                 <constraint firstAttribute="trailing" secondItem="y6r-gE-rc0" secondAttribute="trailing" id="Uzp-rO-7Wi"/>
                 <constraint firstAttribute="trailing" secondItem="net-ve-eMU" secondAttribute="trailing" constant="5" id="YBd-bx-zJQ"/>
                 <constraint firstAttribute="trailing" secondItem="FPd-Uy-tDO" secondAttribute="trailing" constant="5" id="dEJ-2i-Une"/>
                 <constraint firstAttribute="bottom" secondItem="net-ve-eMU" secondAttribute="bottom" constant="20" id="dNf-yZ-i1E"/>
                 <constraint firstItem="FPd-Uy-tDO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ewE-V7-LxR"/>
+                <constraint firstItem="net-ve-eMU" firstAttribute="top" secondItem="FPd-Uy-tDO" secondAttribute="bottom" constant="30" id="fLS-uI-OYO"/>
                 <constraint firstItem="net-ve-eMU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="hIe-L6-Pj6"/>
                 <constraint firstItem="y6r-gE-rc0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="s27-c7-HLf"/>
                 <constraint firstAttribute="bottom" secondItem="y6r-gE-rc0" secondAttribute="bottom" id="sfw-fY-FLD"/>

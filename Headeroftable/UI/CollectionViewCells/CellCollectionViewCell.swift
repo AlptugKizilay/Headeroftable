@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CellCollectionViewCell: UICollectionViewCell {
 
@@ -37,12 +38,43 @@ class CellCollectionViewCell: UICollectionViewCell {
             self.layer.borderWidth = 0.5
             self.layer.borderColor = UIColor.lightGray.cgColor
         }
-    public func configure(with image: UIImage) {
-        imageView.image = image
+//    public func configure(with image: UIImage) {
+//        imageView.image = image
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.layer.cornerRadius = 12
+//        imageView.clipsToBounds = true
+//    }
+    func configure(with article: Article){
+        labelTitle.text = article.title
+        labelAbstract.text = article.abstract
+        
+        if let metadata = article.media.first?.mediaMetadata[2]{
+            if let url = URL(string: metadata.url) {
+                        // Kingfisher ile resim yükle
+                        imageView.kf.setImage(
+                            with: url,
+                            placeholder: UIImage(named: "placeholder"), // Varsayılan görsel
+                            options: [
+                                .transition(.fade(0.3)), // Yumuşak geçiş
+                                .cacheOriginalImage // Resmi önbelleğe al
+                            ]
+                        )
+                    }
+                } else {
+                    // Eğer resim yoksa placeholder göster
+                    imageView.image = UIImage(named: "placeholder")
+                }
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
+        labelTitle.numberOfLines = 0
+        labelAbstract.numberOfLines = 0
+        labelTitle.lineBreakMode = .byWordWrapping
+        labelAbstract.lineBreakMode = .byWordWrapping
+        
     }
+    
+    
     override var isHighlighted: Bool {
         didSet {
             UIView.animate(withDuration: 0.4, animations: {
