@@ -18,7 +18,7 @@ class APIClient {
     // Singleton pattern: APIClient her yerden erişilebilir.
     static let shared = APIClient()
     private init() {}
-
+    
     /// Verilen URL'den makaleleri çeker
     /// - Parameter url: API için hedef URL
     /// - Returns: Makale dizisi içeren bir Observable
@@ -29,20 +29,20 @@ class APIClient {
                 switch response.result {
                 case .success(let data):
                     do {
-//                        if let jsonString = String(data: data!, encoding: .utf8) {
-//                                    print("Response Data: \(jsonString)")  // JSON verisini konsola yazdır
-//                                } else {
-//                                    print("Data couldn't be converted to string.")
-//                                }
+                        //                        if let jsonString = String(data: data!, encoding: .utf8) {
+                        //                                    print("Response Data: \(jsonString)")  // JSON verisini konsola yazdır
+                        //                                } else {
+                        //                                    print("Data couldn't be converted to string.")
+                        //                                }
                         // Gelen JSON verisini çöz
                         let decodedResponse = try JSONDecoder().decode(ResponseWrapper.self, from: data!)
-                                            // "results" içerisindeki makaleleri al
+                        // "results" içerisindeki makaleleri al
                         let articles = decodedResponse.results
                         
-                                            // Veriyi gözlemcilere ilet
+                        // Veriyi gözlemcilere ilet
                         observer.onNext(articles)
                         
-                                            // İşlemi tamamla
+                        // İşlemi tamamla
                         observer.onCompleted()
                     } catch let decodingError{
                         // JSON parsing hatası

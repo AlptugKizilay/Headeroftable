@@ -19,10 +19,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7U-tt-RLf">
                         <rect key="frame" x="0.0" y="0.0" width="95" height="32"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
-                        <connections>
-                            <action selector="buttonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="3wH-D3-zU9"/>
-                        </connections>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
                     </button>
                 </subviews>
             </view>

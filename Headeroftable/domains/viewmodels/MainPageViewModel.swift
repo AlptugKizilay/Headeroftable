@@ -12,14 +12,14 @@ import RxCocoa
 class MainPageViewModel {
     private let fetchArticlesUseCase: FetchArticlesUseCaseProtocol
     private let disposeBag = DisposeBag()
-
+    
     let articles: BehaviorRelay<[Article]> = BehaviorRelay(value: [])
     let error: PublishSubject<String> = PublishSubject()
-
+    
     init(fetchArticlesUseCase: FetchArticlesUseCaseProtocol = FetchArticlesUseCase()) {
         self.fetchArticlesUseCase = fetchArticlesUseCase
     }
-
+    
     func fetchArticles() {
         fetchArticlesUseCase.execute()
             .observe(on: MainScheduler.instance) // ana thread'de işlenmesini sağlar

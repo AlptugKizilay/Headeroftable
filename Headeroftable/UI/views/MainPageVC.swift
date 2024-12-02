@@ -10,14 +10,14 @@ import RxSwift
 import RxCocoa
 
 class MainPageVC: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     private let viewModel = MainPageViewModel()
     private let disposeBag = DisposeBag()
     let customTabBarView = CustomTabBarView.createView()
     private var previousScrollOffset: CGFloat = 0
     var articles: [Article] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -26,7 +26,7 @@ class MainPageVC: UIViewController {
         setupBindings()
         tableView.reloadData()
         
-        }
+    }
     private func setupBindings() {
         viewModel.articles
             .observe(on: MainScheduler.instance)
@@ -38,7 +38,7 @@ class MainPageVC: UIViewController {
                 print("Error: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
-
+        
         // Hata durumunda bir uyarı göster
         viewModel.error
             .observe(on: MainScheduler.instance)
@@ -49,26 +49,26 @@ class MainPageVC: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-
+    
     private func setupTableView() {
-            tableView.dataSource = self
-            tableView.delegate = self
-            
-        }
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+    }
     private func setupCustomTabBar() {
-
-            customTabBarView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(customTabBarView)
-            customTabBarView.layer.cornerRadius = 40
-            customTabBarView.backgroundColor = .lightGray
-            NSLayoutConstraint.activate([
-                customTabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: +32),
-                customTabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-                customTabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
-                customTabBarView.heightAnchor.constraint(equalToConstant: 80)
-            ])
-        }
-
+        
+        customTabBarView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(customTabBarView)
+        customTabBarView.layer.cornerRadius = 40
+        customTabBarView.backgroundColor = .lightGray
+        NSLayoutConstraint.activate([
+            customTabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: +32),
+            customTabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            customTabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            customTabBarView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    
 }
 extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,22 +77,24 @@ extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-                    // İlk CollectionView için
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath) as! FirstCellTableViewCell
-                    cell.viewModel = viewModel // ViewModel'i hücreye ata
-                    cell.bindViewModel() // ViewModel'i bağla
-                    return cell
-                } else if indexPath.row == 1 {
-                    // İkinci CollectionView için
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "secondCell", for: indexPath) as! SecondCellTableViewCell
-                    return cell
-                }else {
-                   
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CellTableViewCell
-                    let article = articles[indexPath.row - 2]
-                    cell.label.text = article.title
-        return cell
-                }
+            // İlk CollectionView için
+            let cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath) as! FirstCellTableViewCell
+            cell.viewModel = viewModel // ViewModel'i hücreye ata
+            cell.bindViewModel() // ViewModel'i bağla
+            return cell
+        } else if indexPath.row == 1 {
+            // İkinci CollectionView için
+            let cell = tableView.dequeueReusableCell(withIdentifier: "secondCell", for: indexPath) as! SecondCellTableViewCell
+            cell.viewModel = viewModel // ViewModel'i hücreye ata
+            cell.bindViewModel() // ViewModel'i bağla
+            return cell
+        }else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CellTableViewCell
+            let article = articles[indexPath.row - 2]
+            cell.label.text = article.title
+            return cell
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
@@ -107,10 +109,10 @@ extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
 extension MainPageVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView == tableView else { return }
-
+        
         let currentOffset = scrollView.contentOffset.y
         let difference = currentOffset - previousScrollOffset
-
+        
         if difference > 0 && currentOffset > 0 {
             // Scroll Down: Tab bar'ı gizle
             UIView.animate(withDuration: 0.7) {
@@ -125,12 +127,12 @@ extension MainPageVC: UIScrollViewDelegate {
                 self.customTabBarView.alpha = 1
             }
         }
-
+        
         // Scroll offset'i güncelle
         previousScrollOffset = currentOffset
     }
 }
-    
+
 
 
 

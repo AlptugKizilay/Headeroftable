@@ -19,41 +19,36 @@ class buttonsCellCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     func setupCardStyle() {
-            // Hücre arka planını ayarla
-        self.backgroundColor = .white
-            
-            // Köşe yuvarlama
-            self.layer.cornerRadius = 10
-            self.layer.masksToBounds = false // Gölge düzgün görünmesi için `false`
-            
-            // Gölgelendirme
-            self.layer.shadowColor = UIColor.black.cgColor
-            self.layer.shadowOpacity = 0.2
-            self.layer.shadowOffset = CGSize(width: 0, height: 3)
-            self.layer.shadowRadius = 6
-            
-            // Kenarlık (isteğe bağlı)
-            self.layer.borderWidth = 0.5
-            self.layer.borderColor = UIColor.lightGray.cgColor
-        }
-    public func configure() {
+        self.backgroundColor = .clear
+        // self.layer.cornerRadius = 16
+        self.layer.masksToBounds = false
         
-        buttonOutlet.contentMode = .scaleAspectFill
-        buttonOutlet.layer.cornerRadius = 12
+        // Gölgelendirme
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowRadius = 6
+    }
+    public func configure(with title: String, isSelected: Bool = false) {
+        buttonOutlet.setTitle(title, for: .normal)
+        buttonOutlet.setTitleColor(isSelected ? .white : .black, for: .normal)
+        buttonOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        buttonOutlet.backgroundColor = isSelected ? UIColor.red : UIColor.clear
+        buttonOutlet.layer.cornerRadius = 16
+        buttonOutlet.layer.borderWidth = isSelected ? 0 : 1
+        buttonOutlet.layer.borderColor = UIColor.lightGray.cgColor
         buttonOutlet.clipsToBounds = true
+        
     }
-    override var isHighlighted: Bool {
-        didSet {
-            UIView.animate(withDuration: 0.4, animations: {
-                self.transform = self.isHighlighted ? CGAffineTransform(scaleX: 0.9, y: 0.9) : .identity
-            })
-        }
-    }
+    //    override var isHighlighted: Bool {
+    //        didSet {
+    //            UIView.animate(withDuration: 0.4, animations: {
+    //                self.transform = self.isHighlighted ? CGAffineTransform(scaleX: 0.9, y: 0.9) : .identity
+    //            })
+    //        }
+    //    }
     static func nib() -> UINib {
         return UINib(nibName: "buttonsCellCollectionViewCell", bundle: nil)
     }
-
-
-    @IBAction func buttonAction(_ sender: Any) {
-    }
+    
 }
