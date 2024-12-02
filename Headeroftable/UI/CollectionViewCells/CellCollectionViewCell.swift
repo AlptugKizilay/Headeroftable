@@ -14,6 +14,7 @@ class CellCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelAbstract: UILabel!
     
+    
     static let identifier = "CellCollectionViewCell"
     
     override func awakeFromNib() {
@@ -61,16 +62,29 @@ class CellCollectionViewCell: UICollectionViewCell {
                 )
             }
         } else {
-            // Eğer resim yoksa placeholder göster
-            imageView.image = UIImage(named: "placeholder")
+            imageView.image = UIImage(named: "news")
         }
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
-        labelTitle.numberOfLines = 0
-        labelAbstract.numberOfLines = 0
-        labelTitle.lineBreakMode = .byWordWrapping
-        labelAbstract.lineBreakMode = .byWordWrapping
+        
+        labelConfig(label: labelTitle)
+        labelConfig(label: labelAbstract)
+        
+        func labelConfig(label : UILabel) {
+            label.layer.shadowColor = UIColor.black.cgColor
+            label.layer.shadowOpacity = 0.7
+            label.layer.shadowOffset = CGSize(width: 1, height: 1)
+            label.layer.shadowRadius = 2
+            label.lineBreakMode = .byWordWrapping
+            label.numberOfLines = 0
+            if label == labelTitle {
+                label.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+            }else {
+                label.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+            }
+            
+        }
         
     }
     

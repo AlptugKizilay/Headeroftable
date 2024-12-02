@@ -20,14 +20,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPd-Uy-tDO">
-                        <rect key="frame" x="5" y="158.66666666666666" width="310" height="19.333333333333343"/>
+                        <rect key="frame" x="5" y="167.33333333333334" width="310" height="19.333333333333343"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="net-ve-eMU">
-                        <rect key="frame" x="5" y="208" width="310" height="12"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <rect key="frame" x="5" y="206.66666666666666" width="310" height="13.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -40,7 +40,7 @@
                 <constraint firstAttribute="trailing" secondItem="FPd-Uy-tDO" secondAttribute="trailing" constant="5" id="dEJ-2i-Une"/>
                 <constraint firstAttribute="bottom" secondItem="net-ve-eMU" secondAttribute="bottom" constant="20" id="dNf-yZ-i1E"/>
                 <constraint firstItem="FPd-Uy-tDO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ewE-V7-LxR"/>
-                <constraint firstItem="net-ve-eMU" firstAttribute="top" secondItem="FPd-Uy-tDO" secondAttribute="bottom" constant="30" id="fLS-uI-OYO"/>
+                <constraint firstItem="net-ve-eMU" firstAttribute="top" secondItem="FPd-Uy-tDO" secondAttribute="bottom" constant="20" id="fLS-uI-OYO"/>
                 <constraint firstItem="net-ve-eMU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="hIe-L6-Pj6"/>
                 <constraint firstItem="y6r-gE-rc0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="s27-c7-HLf"/>
                 <constraint firstAttribute="bottom" secondItem="y6r-gE-rc0" secondAttribute="bottom" id="sfw-fY-FLD"/>

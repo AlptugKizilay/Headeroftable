@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "news.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "yemek_resim@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
