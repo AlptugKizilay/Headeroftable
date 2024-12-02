@@ -40,13 +40,13 @@ class buttonsCellCollectionViewCell: UICollectionViewCell {
         buttonOutlet.clipsToBounds = true
         
     }
-    //    override var isHighlighted: Bool {
-    //        didSet {
-    //            UIView.animate(withDuration: 0.4, animations: {
-    //                self.transform = self.isHighlighted ? CGAffineTransform(scaleX: 0.9, y: 0.9) : .identity
-    //            })
-    //        }
-    //    }
+    override var isHighlighted: Bool {
+        didSet {
+            UIButton.animate(withDuration: 0.2, animations: {
+                self.transform = self.isHighlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
+            })
+        }
+    }
     static func nib() -> UINib {
         return UINib(nibName: "buttonsCellCollectionViewCell", bundle: nil)
     }
