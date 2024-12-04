@@ -66,7 +66,7 @@ class FirstCellTableViewCell: UITableViewCell {
     
     // UI'yi güncellemek için bir fonksiyon
     private func updateUI(with articles: [Article]) {
-        collectionViewArticles = articles
+        collectionViewArticles = Array(articles.suffix(5))
         collectionView.reloadData()
     }
     

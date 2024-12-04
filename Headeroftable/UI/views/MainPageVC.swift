@@ -11,6 +11,7 @@ import RxCocoa
 
 class MainPageVC: UIViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     private let viewModel = MainPageViewModel()
     private let disposeBag = DisposeBag()
@@ -28,7 +29,7 @@ class MainPageVC: UIViewController {
         
     }
     private func setupBindings() {
-        viewModel.articles
+        viewModel.filteredArticles
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { articles in
                 print("Fetched Articles count: \(articles.count)")
@@ -53,10 +54,13 @@ class MainPageVC: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.separatorStyle = .none
+    }
+    private func setupSearchBar() {
+        searchBar.delegate = self
+        searchBar.placeholder = "Search articles..."
     }
     private func setupCustomTabBar() {
-        
         customTabBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(customTabBarView)
         customTabBarView.layer.cornerRadius = 40
@@ -72,7 +76,6 @@ class MainPageVC: UIViewController {
 }
 extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(articles.count)
         return articles.count + 2
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,18 +94,27 @@ extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
         }else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CellTableViewCell
-            let article = articles[indexPath.row - 2]
-            cell.label.text = article.title
+            cell.article = articles[indexPath.row - 2]
             return cell
         }
     }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.cornerRadius = 10
+        cell.contentView.layer.masksToBounds = true
+        cell.contentView.backgroundColor = .white
+        cell.backgroundColor = .clear
+        
+        // Hücre kenar boşluğu
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 256
         }else if indexPath.row == 1 {
             return 40
         }
-        return 128
+        return 148
         
     }
 }
@@ -130,6 +142,16 @@ extension MainPageVC: UIScrollViewDelegate {
         
         // Scroll offset'i güncelle
         previousScrollOffset = currentOffset
+    }
+}
+extension MainPageVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // ViewModel'e arama kelimesini gönder
+        viewModel.updateSearchKeyword(searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // Klavyeyi kapat
     }
 }
 

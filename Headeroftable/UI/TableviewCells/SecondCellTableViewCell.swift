@@ -88,13 +88,22 @@ extension SecondCellTableViewCell: UICollectionViewDataSource, UICollectionViewD
         return cell
     }
     @objc func filterArticles(for section: String) {
-        
         print("Filter for section: \(section)")
+        viewModel?.updateSelectedSection(section)
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedSection = sections[indexPath.row]
+        let selected = sections[indexPath.row]
+            if selectedSection == selected {
+                // Eğer mevcut seçili butona tekrar dokunulursa filtreyi kaldır
+                selectedSection = nil
+            } else {
+                // Yeni section'ı seç
+                selectedSection = selected
+            }
+        guard let viewModel = viewModel else { return }
+        viewModel.updateSelectedSection(selectedSection)
         collectionView.reloadData() // Görünümü güncelle
-        filterArticles(for: self.selectedSection!)
     }
 }
 
