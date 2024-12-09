@@ -16,24 +16,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="95" height="32"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7U-tt-RLf">
-                        <rect key="frame" x="0.0" y="0.0" width="95" height="32"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNN-eH-J5g">
+                        <rect key="frame" x="18" y="1.9999999999999982" width="59" height="28.333333333333329"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button">
+                            <fontDescription key="titleFontDescription" type="system" pointSize="11"/>
+                        </buttonConfiguration>
                     </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="j7U-tt-RLf" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="2oO-rB-5JD"/>
-                <constraint firstAttribute="bottom" secondItem="j7U-tt-RLf" secondAttribute="bottom" id="AgA-fM-jON"/>
-                <constraint firstItem="j7U-tt-RLf" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="F7S-30-wCg"/>
-                <constraint firstItem="j7U-tt-RLf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Y5L-9v-Xyr"/>
-                <constraint firstItem="j7U-tt-RLf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZUj-27-6y8"/>
-                <constraint firstAttribute="trailing" secondItem="j7U-tt-RLf" secondAttribute="trailing" id="tGi-oo-dQJ"/>
+                <constraint firstItem="eNN-eH-J5g" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="UD0-aP-jA7"/>
+                <constraint firstItem="eNN-eH-J5g" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="vR5-kD-IfX"/>
             </constraints>
             <connections>
-                <outlet property="buttonOutlet" destination="j7U-tt-RLf" id="x4g-dP-ocZ"/>
+                <outlet property="buttonOutlet" destination="eNN-eH-J5g" id="ZPw-NW-ib1"/>
             </connections>
             <point key="canvasLocation" x="38" y="-11"/>
         </collectionViewCell>

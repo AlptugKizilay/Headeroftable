@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,25 +15,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="-60" translatesAutoresizingMaskIntoConstraints="NO" id="Kz2-iz-8oe">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Kz2-iz-8oe">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-0F-6Dy">
-                            <rect key="frame" x="0.0" y="0.0" width="165" height="80"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAr-Lu-xKy">
+                            <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="80"/>
+                            <color key="tintColor" name="mainColor"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="house" catalog="system" imagePlacement="top" title="Home">
                                 <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
                             </buttonConfiguration>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAr-Lu-xKy">
-                            <rect key="frame" x="105" y="0.0" width="165" height="80"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="suit.heart" catalog="system" imagePlacement="top" title="Favorite">
-                                <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
-                            </buttonConfiguration>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpr-oD-MHb">
-                            <rect key="frame" x="210" y="0.0" width="165" height="80"/>
+                            <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="80"/>
+                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="person.crop.circle" catalog="system" imagePlacement="top" title="Profile">
                                 <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
@@ -52,7 +48,6 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="favoriteButton" destination="MAr-Lu-xKy" id="kd6-dn-Ojj"/>
-                <outlet property="homeButton" destination="n9R-0F-6Dy" id="Nk1-eg-HRl"/>
                 <outlet property="profileButton" destination="hpr-oD-MHb" id="iYZ-jX-eAU"/>
                 <outlet property="stackView" destination="Kz2-iz-8oe" id="48C-VY-1rB"/>
             </connections>
@@ -62,7 +57,9 @@
     <resources>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
-        <image name="suit.heart" catalog="system" width="128" height="107"/>
+        <namedColor name="mainColor">
+            <color red="1" green="0.22745098039215686" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

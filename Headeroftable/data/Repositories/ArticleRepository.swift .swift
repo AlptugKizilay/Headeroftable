@@ -15,8 +15,9 @@ protocol ArticleRepositoryProtocol {
 
 class ArticleRepository: ArticleRepositoryProtocol {
     private let apiKey = "ciE5pGJZlFTA65wsGjUl1pB0VmX4M1nW"
+    private let days: Int = 7
     private let apiClient: APIClient
-    lazy private var baseURL = "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=\(apiKey)"
+    lazy private var baseURL = "https://api.nytimes.com/svc/mostpopular/v2/viewed/\(days).json?api-key=\(apiKey)"
 
     init(apiClient: APIClient = APIClient.shared) {
         self.apiClient = apiClient

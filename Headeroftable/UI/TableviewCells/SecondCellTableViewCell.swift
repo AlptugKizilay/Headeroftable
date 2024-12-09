@@ -32,7 +32,6 @@ class SecondCellTableViewCell: UITableViewCell {
         let layoutb = UICollectionViewFlowLayout()
         layoutb.itemSize = UIConstants.buttonsCollectionViewItemSize
         layoutb.scrollDirection = .horizontal
-        print(layoutb.scrollDirection)
         layoutb.sectionInset = UIConstants.buttonsCollectionViewInset
         
         buttonsCollectionView.collectionViewLayout = layoutb
@@ -111,11 +110,15 @@ extension SecondCellTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = sections[indexPath.row] // Section adı veya buton title'ı
         let font = UIFont.systemFont(ofSize: 16, weight: .medium)
+
+  
         
         // Text'in genişliğini hesapla
         let textWidth = text.size(withAttributes: [NSAttributedString.Key.font: font]).width
-        let padding: CGFloat = 32 // Button padding (16 left + 16 right)
+        let padding: CGFloat = 24 // Button padding (16 left + 16 right)
+        let calculatedWidth = textWidth + padding
         
-        return CGSize(width: textWidth + padding, height: 32) // Dinamik genişlik
+        
+        return CGSize(width: calculatedWidth, height: 32) // Dinamik genişlik
     }
 }

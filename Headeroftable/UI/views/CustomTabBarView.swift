@@ -16,16 +16,18 @@ class CustomTabBarView: UIView {
     @IBOutlet weak var profileButton: UIButton!
     
     var contentView: UIView!
+    private var selectedButton: UIButton?
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
-
+        super.init(frame: frame)    
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
  
     }
+    
+
     
     
     static func nib() -> UINib {

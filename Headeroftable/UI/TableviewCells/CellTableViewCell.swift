@@ -73,8 +73,11 @@ class CellTableViewCell: UITableViewCell {
             label.textColor = .white
             if label == titleLabel {
                 label.font = UIFont.boldSystemFont(ofSize: 16)
+
             }else {
                 label.font = UIFont.systemFont(ofSize: 11)
+
+                
             }
             
             

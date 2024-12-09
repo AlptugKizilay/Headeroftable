@@ -20,7 +20,6 @@ class buttonsCellCollectionViewCell: UICollectionViewCell {
     }
     func setupCardStyle() {
         self.backgroundColor = .clear
-        // self.layer.cornerRadius = 16
         self.layer.masksToBounds = false
         
         // Gölgelendirme
@@ -31,14 +30,16 @@ class buttonsCellCollectionViewCell: UICollectionViewCell {
     }
     public func configure(with title: String, isSelected: Bool = false) {
         buttonOutlet.setTitle(title, for: .normal)
-        buttonOutlet.setTitleColor(isSelected ? .white : .black, for: .normal)
-        buttonOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        buttonOutlet.backgroundColor = isSelected ? UIColor.red : UIColor.clear
+        buttonOutlet.setTitleColor(isSelected ? .white : UIColor(named: "mainColor"), for: .normal)
+        buttonOutlet.backgroundColor = isSelected ? UIColor(named: "mainColor") : UIColor.clear
         buttonOutlet.layer.cornerRadius = 16
         buttonOutlet.layer.borderWidth = isSelected ? 0 : 1
         buttonOutlet.layer.borderColor = UIColor.lightGray.cgColor
         buttonOutlet.clipsToBounds = true
-        
+        buttonOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 6, weight: .medium)
+        buttonOutlet.titleLabel?.adjustsFontForContentSizeCategory = false
+
+
     }
     override var isHighlighted: Bool {
         didSet {

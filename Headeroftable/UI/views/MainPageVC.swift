@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SafariServices
 
 class MainPageVC: UIViewController {
     
@@ -64,7 +65,7 @@ class MainPageVC: UIViewController {
         customTabBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(customTabBarView)
         customTabBarView.layer.cornerRadius = 40
-        customTabBarView.backgroundColor = .lightGray
+        customTabBarView.backgroundColor = .white
         NSLayoutConstraint.activate([
             customTabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: +32),
             customTabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
@@ -106,6 +107,12 @@ extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
         
         // Hücre kenar boşluğu
         cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = articles[indexPath.row - 2]
+        guard let url = URL(string: article.url) else { return }
+        let safariVC = SFSafariViewController(url: url )
+        present(safariVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
