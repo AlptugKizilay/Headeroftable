@@ -36,8 +36,8 @@ class buttonsCellCollectionViewCell: UICollectionViewCell {
         buttonOutlet.layer.borderWidth = isSelected ? 0 : 1
         buttonOutlet.layer.borderColor = UIColor.lightGray.cgColor
         buttonOutlet.clipsToBounds = true
-        buttonOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 6, weight: .medium)
-        buttonOutlet.titleLabel?.adjustsFontForContentSizeCategory = false
+        buttonOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        buttonOutlet.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
 
 
     }

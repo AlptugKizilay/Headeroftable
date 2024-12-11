@@ -15,6 +15,6 @@ struct UIConstants {
     static let collectionViewCellIdentifier = "CellCollectionViewCell"
     
     static let buttonsCollectionViewItemSize = CGSize(width: 95, height: 32)
-    static let buttonsCollectionViewInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
+    static let buttonsCollectionViewInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 8)
     static let buttonsCollectionViewCellIdentifier = "buttonsCellCollectionViewCell"
 }
