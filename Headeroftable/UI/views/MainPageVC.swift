@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SafariServices
+import FirebaseFirestore
 
 class MainPageVC: UIViewController {
     
@@ -20,6 +21,8 @@ class MainPageVC: UIViewController {
     private var previousScrollOffset: CGFloat = 0
     var articles: [Article] = []
     
+    let db = Firestore.firestore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -27,13 +30,15 @@ class MainPageVC: UIViewController {
         viewModel.fetchArticles()
         setupBindings()
         tableView.reloadData()
+        //addUser()
+        fetchUsers()
         
     }
     private func setupBindings() {
         viewModel.filteredArticles
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { articles in
-                print("Fetched Articles count: \(articles.count)")
+                //print("Fetched Articles count: \(articles.count)")
                 self.articles = articles
                 self.tableView.reloadData()
             }, onError: { error in
@@ -72,6 +77,32 @@ class MainPageVC: UIViewController {
             customTabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
             customTabBarView.heightAnchor.constraint(equalToConstant: 80)
         ])
+    }
+    func addUser() {
+        let user: [String: Any] = [
+            "name": "John Doe",
+            "email": "johndoe@example.com",
+            "age": 30
+        ]
+
+        db.collection("users").addDocument(data: user) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("User added successfully!")
+            }
+        }
+    }
+    func fetchUsers() {
+        db.collection("users").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching users: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
     }
     
 }

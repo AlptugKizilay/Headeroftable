@@ -57,7 +57,7 @@ class SecondCellTableViewCell: UITableViewCell {
         viewModel.articles
             .observe(on: MainScheduler.instance) // UI işlemleri için ana thread'e geç
             .subscribe(onNext: { [weak self] articles in
-                print("SecondCellTableViewCell - Articles count: \(articles.count)")
+               // print("SecondCellTableViewCell - Articles count: \(articles.count)")
                 // Gelen verilerle hücreyi güncelle
                 self?.updateUI(with: articles)
                 self?.sections = Array(Set(articles.map { $0.section})).sorted()

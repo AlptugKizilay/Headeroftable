@@ -57,7 +57,7 @@ class FirstCellTableViewCell: UITableViewCell {
         viewModel.articles
             .observe(on: MainScheduler.instance) // UI işlemleri için ana thread'e geç
             .subscribe(onNext: { [weak self] articles in
-                print("FirstCellTableViewCell - Articles count: \(articles.count)")
+                //print("FirstCellTableViewCell - Articles count: \(articles.count)")
                 // Gelen verilerle hücreyi güncelle
                 self?.updateUI(with: articles)
             })
