@@ -11,23 +11,32 @@ class CustomTabBarView: UIView {
     
     // XIB bağlantıları
     @IBOutlet weak var stackView: UIStackView!
+   
     @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var favoriteButton: UIButton!
+  
     @IBOutlet weak var profileButton: UIButton!
+    
+    var onProfileButtonTapped: (() -> Void)?
+    var onHomeButtonTapped: (() -> Void)?
     
     var contentView: UIView!
     private var selectedButton: UIButton?
     
     override init(frame: CGRect) {
-        super.init(frame: frame)    
+        super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
- 
     }
     
-
+    
+    @IBAction func homeButtonAct(_ sender: Any) {
+        onHomeButtonTapped?()
+    }
+    @IBAction func profileButtonAct(_ sender: Any) {
+        onProfileButtonTapped?()
+    }
     
     
     static func nib() -> UINib {

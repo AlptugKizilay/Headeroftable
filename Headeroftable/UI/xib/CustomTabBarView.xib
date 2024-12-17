@@ -25,6 +25,9 @@
                             <buttonConfiguration key="configuration" style="plain" image="house" catalog="system" imagePlacement="top" title="Home">
                                 <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="homeButtonAct:" destination="-1" eventType="touchUpInside" id="UHD-2L-x9d"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpr-oD-MHb">
                             <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="80"/>
@@ -33,6 +36,9 @@
                             <buttonConfiguration key="configuration" style="plain" image="person.crop.circle" catalog="system" imagePlacement="top" title="Profile">
                                 <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="profileButtonAct:" destination="-1" eventType="touchUpInside" id="aS6-gy-ZT5"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
@@ -47,8 +53,6 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="favoriteButton" destination="MAr-Lu-xKy" id="kd6-dn-Ojj"/>
-                <outlet property="profileButton" destination="hpr-oD-MHb" id="iYZ-jX-eAU"/>
                 <outlet property="stackView" destination="Kz2-iz-8oe" id="48C-VY-1rB"/>
             </connections>
             <point key="canvasLocation" x="-25" y="-11"/>
@@ -58,7 +62,7 @@
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <namedColor name="mainColor">
-            <color red="1" green="0.22745098039215686" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.22699999809265137" blue="0.2669999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

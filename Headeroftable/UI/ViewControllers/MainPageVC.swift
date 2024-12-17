@@ -15,6 +15,7 @@ class MainPageVC: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
     private let viewModel = MainPageViewModel()
     private let disposeBag = DisposeBag()
     let customTabBarView = CustomTabBarView.createView()
@@ -27,11 +28,12 @@ class MainPageVC: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupCustomTabBar()
+        setupCustomTabBarActions()
         viewModel.fetchArticles()
         setupBindings()
         tableView.reloadData()
         //addUser()
-        fetchUsers()
+        //fetchUsers()
         
     }
     private func setupBindings() {
@@ -78,6 +80,65 @@ class MainPageVC: UIViewController {
             customTabBarView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
+    private func setupCustomTabBarActions() {
+            // Profile Button Action
+            customTabBarView.onProfileButtonTapped = { [weak self] in
+                print("Profile Button Tapped!")
+                self?.navigateToProfile()
+            }
+            
+            // Home Button Action
+            customTabBarView.onHomeButtonTapped = { [weak self] in
+                print("Home Button Tapped!")
+                self?.navigateToHome()
+            }
+        }
+        
+    private func navigateToProfile() {
+        let isUserLoggedIn = false // Burayı Auth kontrolüne bağlayın
+        
+        // Storyboard'u tanımla
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if isUserLoggedIn {
+            // ProfilePageVC için Storyboard ID kullanarak instantiate
+            if let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfilePageVC") as? ProfilePageVC {
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                print("ProfilePageVC Storyboard ID yanlış veya tanımlı değil.")
+            }
+        } else {
+            // LoginPageVC için Storyboard ID kullanarak instantiate
+            if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginPageVC") as? LoginPageVC {
+                navigationController?.pushViewController(loginVC, animated: true)
+            } else {
+                print("LoginPageVC Storyboard ID yanlış veya tanımlı değil.")
+            }
+        }
+    }
+        
+    private func navigateToHome() {
+        // Storyboard'u tanımla
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let navigationController = navigationController else {
+            print("no navigation controller available")
+            return
+        }
+        
+        // MainPageVC için Storyboard ID kullanarak instantiate
+        if let mainPageVC = storyboard.instantiateViewController(withIdentifier: "MainPageVC") as? MainPageVC {
+            // Eğer zaten MainPageVC'deysek yönlendirme yapma
+            if navigationController.viewControllers.contains(where: { $0 is MainPageVC }) {
+                print("Already on Main Page.")
+            } else {
+                navigationController.pushViewController(mainPageVC, animated: true)
+            }
+        } else {
+            print("MainPageVC Storyboard ID yanlış veya tanımlı değil.")
+        }
+    }
+    
     func addUser() {
         let user: [String: Any] = [
             "name": "John Doe",

@@ -1,57 +1,60 @@
-//
-//  AuthViewModel.swift
-//  Headeroftable
-//
-//  Created by Alptuğ Kızılay on 16.12.2024.
-//
-
 import Foundation
 import RxSwift
+import RxCocoa
 
 class AuthViewModel {
-    private let authUseCase: AuthUseCaseProtocol
+    
+    // Use case'lerimizi burada kullanacağız
+    private let registerUserUseCase: RegisterUserUseCaseProtocol
+    private let loginUserUseCase: LoginUserUseCaseProtocol
     private let disposeBag = DisposeBag()
     
-    let authResult = PublishSubject<User>()
-    let error = PublishSubject<String>()
+    // View'de gözlemlenecek durumlar
+    let isLoading = BehaviorRelay<Bool>(value: false)
+    let successMessage = PublishSubject<String>()
+    let errorMessage = PublishSubject<String>()
     
-    
-    init(authUseCase: AuthUseCaseProtocol = AuthUseCase()) {
-        self.authUseCase = authUseCase
+    init(
+        registerUserUseCase: RegisterUserUseCaseProtocol = RegisterUserUseCase(),
+        loginUserUseCase: LoginUserUseCaseProtocol = LoginUserUseCase()
+    ) {
+        self.registerUserUseCase = registerUserUseCase
+        self.loginUserUseCase = loginUserUseCase
     }
     
-    // Kayıt Ol Fonksiyonu
+    // Kullanıcı kaydı
     func registerUser(email: String, password: String) {
-        authUseCase.registerUser(email: email, password: password)
+        isLoading.accept(true) // Yükleniyor durumunu bildir
+        registerUserUseCase.execute(email: email, password: password)
             .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { [weak self] user in
-                    print("VM/ Kayıt Başarılı: \(user)")
-                    self?.authResult.onNext(user)
+                    self?.isLoading.accept(false)
+                    self?.successMessage.onNext("VM- Kullanıcı kaydedildi: \(user.name)")
                 },
                 onError: { [weak self] error in
-                    print("VM/ Kayıt Hatası: \(error.localizedDescription)")
-                    self?.error.onNext(error.localizedDescription)
+                    self?.isLoading.accept(false)
+                    self?.errorMessage.onNext("VM- Hata: \(error.localizedDescription)")
                 }
             )
             .disposed(by: disposeBag)
     }
     
-    // Giriş Yap Fonksiyonu
+    // Kullanıcı girişi
     func loginUser(email: String, password: String) {
-        authUseCase.loginUser(email: email, password: password)
+        isLoading.accept(true) // Yükleniyor durumunu bildir
+        loginUserUseCase.execute(email: email, password: password)
             .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { [weak self] user in
-                    print("VM/ Giriş Başarılı: \(user)")
-                    self?.authResult.onNext(user)
+                    self?.isLoading.accept(false)
+                    self?.successMessage.onNext("VM- Giriş başarılı: \(user.name)")
                 },
                 onError: { [weak self] error in
-                    print("VM/ Giriş Hatası: \(error.localizedDescription)")
-                    self?.error.onNext(error.localizedDescription)
+                    self?.isLoading.accept(false)
+                    self?.errorMessage.onNext("VM- Hata: \(error.localizedDescription)")
                 }
             )
             .disposed(by: disposeBag)
     }
 }
-
