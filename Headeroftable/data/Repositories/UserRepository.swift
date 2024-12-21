@@ -12,6 +12,7 @@ import RxSwift
 protocol UserRepositoryProtocol {
     func fetchUsersAsModels() -> Observable<[User]>
     func fetchUsers() -> Observable<[[String: Any]]>
+    func saveUser(user: User) -> Observable<Void>
 }
 
 class UserRepository: UserRepositoryProtocol {
@@ -45,6 +46,28 @@ class UserRepository: UserRepositoryProtocol {
             return Disposables.create()
         }
     }
+    func saveUser(user: User) -> Observable<Void> {
+            return Observable.create { observer in
+                do {
+                    var userData = try user.asDictionary()
+                    // Eğer user.id nil ise, Firestore'un otomatik bir ID oluşturmasına izin ver
+                    let documentID = user.id ?? UUID().uuidString // Eğer ID yoksa UUID oluştur
+                    userData["id"] = documentID
+                    
+                    self.db.collection("users").document(documentID).setData(userData) { error in
+                        if let error = error {
+                            observer.onError(error)
+                        } else {
+                            observer.onNext(())
+                            observer.onCompleted()
+                        }
+                    }
+                } catch {
+                    observer.onError(error)
+                }
+                return Disposables.create()
+            }
+        }
 }
 
 /*

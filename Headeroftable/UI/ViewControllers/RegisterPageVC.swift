@@ -16,7 +16,7 @@ class RegisterPageVC: UIViewController {
     
     private let authViewModel = AuthViewModel() // ViewModel
     private let disposeBag = DisposeBag()
-
+    static var emailshared = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
@@ -30,6 +30,7 @@ class RegisterPageVC: UIViewController {
                     guard let self = self else { return }
                     let email = self.mailTF.text ?? ""
                     let password = self.passwordTF.text ?? ""
+                    RegisterPageVC.emailshared = email
                     
                     // Kullanıcıyı register etmek için ViewModel'i kullan
                     self.authViewModel.registerUser(email: email, password: password)
@@ -41,7 +42,7 @@ class RegisterPageVC: UIViewController {
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] message in
                     print(message) // Başarı mesajı
-                    self?.navigateToHomePage() // Kayıt başarılıysa anasayfaya yönlendir
+                    self?.navigateToEditProfilePage() // Kayıt başarılıysa anasayfaya yönlendir
                 })
                 .disposed(by: disposeBag)
             
@@ -53,11 +54,11 @@ class RegisterPageVC: UIViewController {
                 })
                 .disposed(by: disposeBag)
         }
-    private func navigateToHomePage() {
+    private func navigateToEditProfilePage() {
             // Ana sayfaya yönlendirme
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let mainPageVC = storyboard.instantiateViewController(withIdentifier: "MainPageVC") as? MainPageVC {
-                navigationController?.setViewControllers([mainPageVC], animated: true)
+        if let EditProfilePageVC = storyboard.instantiateViewController(withIdentifier: "EditProfilePageVC") as? EditProfilePageVC {
+                navigationController?.setViewControllers([EditProfilePageVC], animated: true)
             }
         }
     
