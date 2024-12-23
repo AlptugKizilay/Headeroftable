@@ -16,13 +16,13 @@ class LoginPageVC: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
-    
     private let authViewModel = AuthViewModel()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
+        navigationController?.navigationBar.tintColor = UIColor(named: "colorButton")
     }
     
     private func setupBindings() {

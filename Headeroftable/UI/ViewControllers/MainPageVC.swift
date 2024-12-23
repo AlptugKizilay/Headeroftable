@@ -32,8 +32,6 @@ class MainPageVC: UIViewController {
         viewModel.fetchArticles()
         setupBindings()
         tableView.reloadData()
-        //addUser()
-        //fetchUsers()
         
     }
     private func setupBindings() {
@@ -139,32 +137,7 @@ class MainPageVC: UIViewController {
         }
     }
     
-    func addUser() {
-        let user: [String: Any] = [
-            "name": "John Doe",
-            "email": "johndoe@example.com",
-            "age": 30
-        ]
 
-        db.collection("users").addDocument(data: user) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("User added successfully!")
-            }
-        }
-    }
-    func fetchUsers() {
-        db.collection("users").getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error fetching users: \(error)")
-            } else {
-                for document in snapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-            }
-        }
-    }
     
 }
 extension MainPageVC: UITableViewDataSource, UITableViewDelegate {
