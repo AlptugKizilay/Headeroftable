@@ -13,6 +13,7 @@ import RxSwift
 protocol AuthRepositoryProtocol {
     func registerUser(email: String, password: String) -> Observable<User>
     func loginUser(email: String, password: String) -> Observable<User>
+    func logoutUser() -> Observable<Void>
 }
 
 class AuthRepository: AuthRepositoryProtocol {
@@ -67,6 +68,19 @@ class AuthRepository: AuthRepositoryProtocol {
                     observer.onNext(user)
                     observer.onCompleted()
                 }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func logoutUser() -> Observable<Void> {
+        return Observable.create { observer in
+            do {
+                try Auth.auth().signOut()
+                observer.onNext(())
+                observer.onCompleted()
+            } catch let error {
+                observer.onError(error)
             }
             return Disposables.create()
         }

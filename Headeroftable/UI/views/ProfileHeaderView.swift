@@ -2,6 +2,7 @@ import UIKit
 
 class ProfileHeaderView: UICollectionReusableView {
     static let identifier = "ProfileHeaderView"
+    var onEditProfileTapped: (() -> Void)?
     
     // Profil fotoğrafı
     private let profileImageView: UIImageView = {
@@ -32,6 +33,13 @@ class ProfileHeaderView: UICollectionReusableView {
         control.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         control.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
         return control
+    }()
+    // Edit Profile Butonu
+    private let editProfileButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "pencil"), for: .normal) // iOS SF Symbol
+        button.tintColor = UIColor(named: "colorButton")
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -82,8 +90,21 @@ class ProfileHeaderView: UICollectionReusableView {
             segmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor),
             segmentedControl.heightAnchor.constraint(equalToConstant: 30)
         ])
+        
+        // Edit Profile Butonunu ekle
+        addSubview(editProfileButton)
+        editProfileButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            editProfileButton.topAnchor.constraint(equalTo: topAnchor, constant: 16), // Sağ üst köşe
+            editProfileButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            editProfileButton.widthAnchor.constraint(equalToConstant: 30),
+            editProfileButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        editProfileButton.addTarget(self, action: #selector(didTapEditProfile), for: .touchUpInside)
     }
-    
+    @objc private func didTapEditProfile() {
+        onEditProfileTapped?()
+    }
     private func createCurvedLayer() -> CAShapeLayer {
         let curvedPath = UIBezierPath()
         let width = frame.width

@@ -7,6 +7,7 @@ class AuthViewModel {
     // Use case'lerimizi burada kullanacağız
     private let registerUserUseCase: RegisterUserUseCaseProtocol
     private let loginUserUseCase: LoginUserUseCaseProtocol
+    private let logoutUserUseCase: LogoutUserUseCaseProtocol
     private let disposeBag = DisposeBag()
     
     // View'de gözlemlenecek durumlar
@@ -16,13 +17,15 @@ class AuthViewModel {
     
     init(
         registerUserUseCase: RegisterUserUseCaseProtocol = RegisterUserUseCase(),
-        loginUserUseCase: LoginUserUseCaseProtocol = LoginUserUseCase()
+        loginUserUseCase: LoginUserUseCaseProtocol = LoginUserUseCase(),
+        logoutUserUseCase: LogoutUserUseCaseProtocol = LogoutUserUseCase()
     ) {
         self.registerUserUseCase = registerUserUseCase
         self.loginUserUseCase = loginUserUseCase
+        self.logoutUserUseCase = logoutUserUseCase
     }
     
-    // Kullanıcı kaydı
+
     func registerUser(email: String, password: String) {
         isLoading.accept(true) // Yükleniyor durumunu bildir
         registerUserUseCase.execute(email: email, password: password)
@@ -40,7 +43,7 @@ class AuthViewModel {
             .disposed(by: disposeBag)
     }
     
-    // Kullanıcı girişi
+
     func loginUser(email: String, password: String) {
         isLoading.accept(true) // Yükleniyor durumunu bildir
         loginUserUseCase.execute(email: email, password: password)
@@ -57,4 +60,19 @@ class AuthViewModel {
             )
             .disposed(by: disposeBag)
     }
+    func logout(completion: @escaping (String?) -> Void) {
+            logoutUserUseCase.execute()
+                .observe(on: MainScheduler.instance)
+                .subscribe(
+                    onNext: {
+                        completion(nil) // Başarılı bir şekilde çıkış yapıldı
+                    },
+                    onError: { error in
+                        completion(error.localizedDescription) // Hata mesajı döndür
+                    }
+                )
+                .disposed(by: disposeBag)
+        }
+    
+    
 }

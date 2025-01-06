@@ -154,6 +154,12 @@ class ProfilePageVC: UIViewController, UICollectionViewDelegate, UICollectionVie
             header.configure(with: UIImage(named: "pizza_resim")!, name: "Melissa Peters")
             // Segmented Control Action
             header.segmentedControl.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
+            header.onEditProfileTapped = { [weak self] in
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        if let EditProfilePageVC = storyboard.instantiateViewController(withIdentifier: "EditProfilePageVC") as? EditProfilePageVC {
+                            self?.navigationController?.pushViewController(EditProfilePageVC, animated: true)
+                        }
+                    }
             return header
         }
         return UICollectionReusableView()

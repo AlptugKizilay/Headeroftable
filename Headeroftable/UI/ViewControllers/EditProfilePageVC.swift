@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import FirebaseAuth
 
 enum EditProfileMode {
     case newUser // Yeni kullanıcı bilgileri girecek
@@ -43,10 +44,13 @@ class EditProfilePageVC: UIViewController {
     private func configureViewForMode() {
         switch mode {
         case .newUser:
-            let emailshared = RegisterPageVC.emailshared
             title = "Complete Profile" // Yeni kullanıcı için başlık
-            emailTextField.text = emailshared
-            emailTextField.isEnabled = true // Email alanı düzenlenebilir
+            if let currentUser = Auth.auth().currentUser {
+                emailTextField.text = currentUser.email
+                emailTextField.isEnabled = false // E-posta düzenlenemez
+            }else {
+                print("Kullanıcı oturumu kapalı.")
+            }
         case .editProfile:
             title = "Edit Profile" // Mevcut profil düzenleme için başlık
             if let user = user {
