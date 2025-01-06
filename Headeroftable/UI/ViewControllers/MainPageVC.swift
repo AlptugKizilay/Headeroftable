@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import SafariServices
 import FirebaseFirestore
+import FirebaseAuth
 
 class MainPageVC: UIViewController {
     
@@ -92,8 +93,8 @@ class MainPageVC: UIViewController {
             }
         }
         
-    private func navigateToProfile() {
-        let isUserLoggedIn = false // Burayı Auth kontrolüne bağlayın
+    public func navigateToProfile() {
+        let isUserLoggedIn = Auth.auth().currentUser != nil 
         
         // Storyboard'u tanımla
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -115,7 +116,7 @@ class MainPageVC: UIViewController {
         }
     }
         
-    private func navigateToHome() {
+    public func navigateToHome() {
         // Storyboard'u tanımla
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         

@@ -39,12 +39,6 @@ class CellCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 0.5
         self.layer.borderColor = UIColor.lightGray.cgColor
     }
-    //    public func configure(with image: UIImage) {
-    //        imageView.image = image
-    //        imageView.contentMode = .scaleAspectFit
-    //        imageView.layer.cornerRadius = 12
-    //        imageView.clipsToBounds = true
-    //    }
     func configure(with article: Article){
         labelTitle.text = article.title
         labelAbstract.text = article.abstract
