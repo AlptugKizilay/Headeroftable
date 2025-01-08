@@ -42,7 +42,7 @@ class RegisterPageVC: UIViewController {
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] message in
                     print(message) // Başarı mesajı
-                    self?.navigateToEditProfilePage() // Kayıt başarılıysa anasayfaya yönlendir
+                    self?.navigateToEditProfilePage() // Kayıt başarılıysa editprofile yönlendir
                 })
                 .disposed(by: disposeBag)
             

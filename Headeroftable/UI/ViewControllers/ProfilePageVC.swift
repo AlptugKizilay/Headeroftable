@@ -1,11 +1,15 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProfilePageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-
-    //@IBOutlet weak var collectionView: UICollectionView!
     private var collectionView: UICollectionView!
     let customTabBarView = CustomTabBarView.createView()
+    
+    private let viewModel = ProfileViewModel()
+    private let disposeBag = DisposeBag()
+    
     private var news: [(image: UIImage, title: String, details: String)] = []
     public var selectedSegmentIndex: Int = 1
     
@@ -14,7 +18,7 @@ class ProfilePageVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         
         view.backgroundColor = .white
         setupCollectionView()
-        
+        setupBindings()
         // Örnek veriler
         news = [
             (image: UIImage(named: "news")!, title: "Haber 1", details: "Bu, haber 1 için detaylı bir açıklamadır."),
@@ -36,7 +40,25 @@ class ProfilePageVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         navigationController?.setNavigationBarHidden(true, animated: true) // Navigation bar gizlenir
         setupCustomTabBarActions()
         setupCustomTabBar()
+        //setupBindings()
     }
+    
+    private func setupBindings() {
+        // Kullanıcı bilgilerini UI ile bağla
+        viewModel.currentUser
+            .compactMap { $0 } // Nil olmayan kullanıcıları filtrele
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] user in
+                self?.updateUI(with: user)
+            })
+            .disposed(by: disposeBag)
+    }
+    private func updateUI(with user: User) {
+            // Kullanıcı bilgilerini UI'de güncelle
+           // print("Kullanıcı Adı: \(user.name)")
+            //print("Favori Haberler: \(user.favoriteArticles.map { $0.articleId })")
+        }
+    
     private func setupCustomTabBar() {
         customTabBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(customTabBarView)
@@ -157,6 +179,7 @@ class ProfilePageVC: UIViewController, UICollectionViewDelegate, UICollectionVie
             header.onEditProfileTapped = { [weak self] in
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         if let EditProfilePageVC = storyboard.instantiateViewController(withIdentifier: "EditProfilePageVC") as? EditProfilePageVC {
+                            EditProfilePageVC.mode = .editProfile
                             self?.navigationController?.pushViewController(EditProfilePageVC, animated: true)
                         }
                     }

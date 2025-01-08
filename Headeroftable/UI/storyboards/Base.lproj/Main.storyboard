@@ -806,6 +806,7 @@
                         <outlet property="dateOfBirthTextField" destination="FSF-wh-Bw0" id="B2O-9x-09g"/>
                         <outlet property="emailTextField" destination="pez-lS-hyS" id="8Vx-qO-lvk"/>
                         <outlet property="genderSegmentedControl" destination="WXY-o7-K3C" id="6Uy-m2-0fN"/>
+                        <outlet property="logoutButton" destination="kyC-bY-gYy" id="Ibt-Lt-reB"/>
                         <outlet property="nameTextField" destination="WRj-EF-Hch" id="2WJ-W0-F4A"/>
                         <outlet property="saveButtonOutlet" destination="SeW-qr-DRa" id="8RD-Hi-yDg"/>
                     </connections>

@@ -9,12 +9,12 @@ import FirebaseFirestore
 
 struct User: Codable {
     @DocumentID var id: String?
-    let name: String
-    let email: String
-    let dateOfBirth: Date
-    let gender: Gender
-    let profileImageURL: String?
-    let country: String
+    var name: String
+    var email: String
+    var dateOfBirth: Date
+    var gender: Gender
+    var profileImageURL: String?
+    var country: String
     var favoriteArticles: [FavoriteArticle]
 
     enum Gender: String, Codable {

@@ -47,27 +47,47 @@ class UserRepository: UserRepositoryProtocol {
         }
     }
     func saveUser(user: User) -> Observable<Void> {
-            return Observable.create { observer in
-                do {
-                    var userData = try user.asDictionary()
-                    // Eğer user.id nil ise, Firestore'un otomatik bir ID oluşturmasına izin ver
-                    let documentID = user.id ?? UUID().uuidString // Eğer ID yoksa UUID oluştur
-                    userData["id"] = documentID
-                    
-                    self.db.collection("users").document(documentID).setData(userData) { error in
-                        if let error = error {
-                            observer.onError(error)
-                        } else {
-                            observer.onNext(())
-                            observer.onCompleted()
-                        }
-                    }
-                } catch {
-                    observer.onError(error)
-                }
+        return Observable.create { observer in
+            guard let userId = user.id else {
+                observer.onError(NSError(domain: "UserRepository", code: 0, userInfo: [NSLocalizedDescriptionKey: "User ID is missing"]))
                 return Disposables.create()
             }
+            
+            do {
+                let userData = try user.asDictionary()
+                self.db.collection("users").document(userId).setData(userData) { error in
+                    if let error = error {
+                        observer.onError(error)
+                    } else {
+                        observer.onNext(())
+                        observer.onCompleted()
+                    }
+                }
+            } catch {
+                observer.onError(error)
+            }
+            
+            return Disposables.create()
         }
+    }
+//    func saveUser(user: User) -> Observable<Void> {
+//        return Observable.create { observer in
+//            do {
+//                let userData = try user.asDictionary()
+//                self.db.collection("users").document(user.id ?? UUID().uuidString).setData(userData) { error in
+//                    if let error = error {
+//                        observer.onError(error)
+//                    } else {
+//                        observer.onNext(())
+//                        observer.onCompleted()
+//                    }
+//                }
+//            } catch {
+//                observer.onError(error)
+//            }
+//            return Disposables.create()
+//        }
+//    }
 }
 
 /*

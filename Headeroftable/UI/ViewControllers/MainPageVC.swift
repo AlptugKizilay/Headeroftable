@@ -94,8 +94,8 @@ class MainPageVC: UIViewController {
         }
         
     public func navigateToProfile() {
-        let isUserLoggedIn = Auth.auth().currentUser != nil 
-        
+        let isUserLoggedIn = Auth.auth().currentUser != nil
+        //let isUserLoggedIn = false
         // Storyboard'u tanımla
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
